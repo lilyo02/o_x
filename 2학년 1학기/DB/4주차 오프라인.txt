@@ -1,0 +1,204 @@
+create database 회사DB;
+use 회사DB;
+
+create table Department(
+	DeptNo int not null,
+	DeptName char(10),
+	Floor int,
+	primary key (DeptNo)
+);
+
+insert into Department values (1, '영업', 8);
+insert into Department values (2, '기획', 10);
+insert into Department values (3, '개발', 9);
+insert into Department values (4, '총무', 7);
+
+create table Employee (
+	EmpNo int not null,
+	EmpName char(10),
+	Title char(10),
+	Manager int,
+	Salary int,
+	Dno int,
+	primary key (EmpNo),
+	foreign key (Dno) references Department (DeptNo),
+	foreign key (Manager) references Employee (EmpNo)
+);
+
+insert into Employee values (4377, '이성래', '사장', null, 5000000, 2);
+insert into Employee values (1003, '조민희', '과장', 4377, 3000000, 2);
+insert into Employee values (3011, '이수민', '부장', 4377, 4000000, 3);
+insert into Employee values (3426, '박영권', '과장', 4377, 3000000, 1);
+insert into Employee values (2106, '김창섭', '대리', 1003, 2500000, 2);
+insert into Employee values (3427, '최종철', '사원', 3011, 1500000, 3);
+insert into Employee values (1365, '김상원', '사원', 3426, 1500000, 1);
+
+Select *
+From Employee;
+
+-- 종이 문제 1번
+Select EmpName, Title, Salary
+From Employee
+Where EmpName = '김창섭';
+
+-- 종이 문제 2번
+Select EmpName, Title
+From Employee
+Where EmpName like '김%';
+
+-- 종이 문제 3번
+Select EmpName, Salary
+From Employee
+Where Salary Between 3000000 And 4000000;
+
+-- 종이 문제 4번
+Select EmpName, Title
+From Employee
+Where Manager is null;
+
+-- 종이 문제 5번
+Select EmpName, Salary
+From Employee
+Where Dno = 2
+Order By Salary Desc;
+
+-- 종이 문제 6번
+Select AVG(Salary) As '모든 직원 평균 월급'
+From Employee;
+
+-- 종이 문제 7번
+Select Count(*) As '회사 직원의 수'
+From Employee;
+
+-- 종이 문제 8번
+Select Count(Title) As '과장인 직원의 수'
+From Employee
+Where Title = '과장';
+
+-- 종이 문제 9번
+Select AVG(Salary) As '2번 부서 직원들의 평균 월급'
+From Employee
+Where Dno = 2;
+
+-- 종이 문제 10번
+Select Dno, AVG(Salary) As '부서별 평균 월급'
+From Employee
+Group By Dno;
+
+-- 종이 문제 11번
+Select Dno, AVG(Salary) As '부서의 평균 월급'
+From Employee
+Group By Dno
+Having AVG(Salary) >= 2500000;
+
+-- 종이 문제 12번
+Select EmpName
+From Employee, Department
+Where Dno = 1;
+
+-- 종이 문제 13번
+Select EmpName
+From Employee, Department
+Where Department.DeptNo = Employee.Dno And DeptName = '영업';
+
+
+-- 종이 문제 14번
+Select EmpName, DeptName
+From Department, Employee
+Where Department.DeptNo = Employee.Dno and EmpName = '김창섭';
+
+-- 종이 문제 15번
+Select EmpName, Salary
+From Employee
+Where Title = '과장'
+Order By EmpName Asc;
+
+
+-- 교수님 칠판 문제
+Select EmpName, Title, Salary
+From Employee, Department
+Where Employee.Dno = Department.DeptNo and Floor = 8;
+
+Select Min(Salary)
+From Employee;
+
+Select Min(EmpName) -- 가나다 순 가장 앞
+From Employee;
+
+Select Max(EmpName) -- 가나다 순 가장 뒤
+From Employee;
+
+Select Avg(EmpName)
+From Employee; -- 오류
+
+Select EmpName
+From Employee
+Order By EmpName;
+
+Select Count(EmpNo)
+From Employee;
+
+Select Count(Manager) -- Manager에 null값 있어서 세어지지 않음
+From Employee;
+
+Select Count(*)
+From Employee
+Where Title = '과장';
+
+Select Title, Count(*)
+From Employee
+Group By Title;
+
+Select Title, Count(*)
+From Employee
+Group By Title
+Having Count(*) >= 2;
+
+-- 김창섭이 근무하는 부서 이름은?
+-- 중첩 질의
+Select DeptName
+From Department
+Where DeptNo = (
+	Select Dno
+	From Employee
+	Where EmpName = '김창섭'
+	);
+
+-- 중첩 : 영업 부서에서 근무하는 직원의 이름
+Select EmpName
+From Employee
+Where Dno = (
+	Select DeptNo
+	From Department
+	Where DeptName = '영업'
+);
+
+-- 과제 문제
+Select EmpName, Title, DeptName
+From Employee, Department
+Where Employee.Dno = Department.DeptNo and EmpName like '이%';
+
+Select EmpName, Title, DeptName
+From Employee, Department
+Where Employee.Dno = Department.DeptNo and Title = '과장' and Dno <> 1;
+
+Select EmpName, Salary, DeptName
+From Employee, Department
+Where Employee.Dno = Department.DeptNo and Salary Between 3000000 and 4500000;
+
+Select EmpName, Title, DeptName
+From Employee, Department
+Where Employee.Dno = Department.DeptNo and Manager is null;
+
+Select EmpName, Salary, Title
+From Employee, Department
+Where Employee.Dno = Department.DeptNo and DeptName = '기획'
+Order By Salary Desc;
+
+Select Min(EmpName), Max(EmpName)
+From Employee;
+
+Select Title, Count(*) As '직책의 직원 수'
+From Employee
+Group By Title
+Having Count(*) >= 2;

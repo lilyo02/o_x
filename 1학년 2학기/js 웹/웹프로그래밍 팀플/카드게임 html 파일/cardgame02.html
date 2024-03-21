@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>카드 짝 맞추기</title>
+  </head>
+
+  <body>
+    <canvas id="myCanvas" width="900" height="600" style="border: 2px solid">
+    </canvas>
+    <script>
+      const word = [
+        "격노한",
+        "기뻐하는",
+        "기진맥진한",
+        "낙관적인",
+        "만족하는",
+        "무기력한",
+        "불만스러운",
+        "에대해사과하다",
+        "우울한",
+        "유익한",
+        "즐거워하는",
+        "피로한",
+        "furious",
+        "delighted",
+        "exhausted",
+        "optimistic",
+        "content",
+        "listless",
+        "frustrating",
+        "apologize for",
+        "miserable",
+        "informative",
+        "amused",
+        "fatigued",
+      ];
+      let board = new Array(4);
+      for (var i = 0; i < board.length; i++) {
+        board[i] = new Array(6);
+      }
+      // document.write("0")
+      for (var i = 0; i < 4; i++) {
+        for (var j = 0; j < 6; j++) {
+          var rands = Math.floor(Math.random() * word.length); //랜덤배정
+          console.log(rands);
+          if (!board.includes(rands)) {
+            //board에 rands가 이미 포함되어 있다면
+            //rands(랜덤배정된 단어가) board에 이미 포함(includes)되어 있는지 확인
+            board[i][j] = rands; //다른 rands를 찾기
+            console.log(board[i][j]);
+          } else {
+            console.log("오류");
+          }
+        }
+      }
+      // board[i][j] = Math.floor(Math.random() * word.length);
+      // console.log(board[i][j]);
+
+      const imgs = [];
+      const imgWidth = 150;
+      const imgHeight = 150;
+      const floorcardnum = 24;
+      myCanvas.width = imgWidth * 6;
+      myCanvas.height = imgHeight * 4;
+
+      var current = 0;
+      var total = 0;
+      let disableDeck = false;
+      let CardOne, CardTwo;
+
+      /* let board = [
+      [1, 2, 3, 4, 5, 6],
+      [1, 2, 3, 4, 5, 6],
+      [7, 8, 9, 10, 11, 12],
+      [7, 8, 9, 10, 11, 12], //랜덤으로 고치기
+    ]; */
+
+      /* function PushwordCards1() {
+      for (var i = 0; i < word.length; i++) {
+        imgs.push(new Image());
+        var rad = Math.floor(Math.random() * word.length);
+        imgs[i].src = "word/" + word[rad] + ".jpg";
+      }
+    }
+    PushwordCards1(); */
+      function PushwordCards2() {
+        for (var i = 0; i < word.length; i++) {
+          imgs.push(new Image());
+          imgs[i].src = "word/" + word[i] + ".jpg";
+        }
+      }
+      PushwordCards2();
+      var ctx = myCanvas.getContext("2d");
+      function OpenOneCard(row, col) {
+        const imgs = new Image();
+        ctx.drawImage(imgs[board[row][col]], col * imgWidth, row * imgHeight);
+        //imgs[i].src = "word/" + word[rands] + ".jpg";
+      }
+      i;
+
+      //처음에 잠시동안 카드를 보여주고 덮는 함수만들기
+
+      function OpenAllCard() {
+        for (var i = 0; i < 4; i++) {
+          for (var j = 0; j < 6; j++) {
+            OpenOneCard(i, j);
+          }
+        }
+      }
+
+      function CloseOneCard(row, col) {
+        ctx.fillStyle = "navy";
+        ctx.fillRect(col * imgWidth, row * imgHeight, imgWidth, imgHeight);
+        ctx.strokeStyle = "white";
+        ctx.strokeRect(col * imgWidth, row * imgHeight, imgWidth, imgHeight);
+      }
+
+      function CloseAllCard() {
+        for (var i = 0; i < 4; i++) {
+          for (var j = 0; j < 6; j++) {
+            CloseOneCard(i, j);
+          }
+        }
+      }
+
+      //시작했을때 0.5초 뒤에 카드 전체 오픈, 3초 뒤에 전체 클로즈
+      setTimeout(OpenAllCard, 500);
+      setTimeout(CloseAllCard, 2500);
+
+      imgs.addEventListener("click", function () {
+        if (clickFlag && !completedOne.includes(imgs)) {
+        }
+      });
+
+      // let clickCard = [];
+      // let matchedCard = [];
+
+      // function(c) {
+      //     card.addEventListener('click', () => {
+      //         if(clickFlag && !matchedCard.includes(c)) {
+      //             c.classList.togle('flipped';
+      //             if(clickedCard.length === 2) {
+      //                 if
+      //             })
+      //         }
+      //     })
+      // }
+
+      //모든 카드가 Open일때 끝내는 알림문구
+
+      //게임 할때 마다 랜덤하게 시작되도록 바꾸어야함
+    </script>
+  </body>
+</html>

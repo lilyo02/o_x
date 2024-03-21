@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>영어사전</title>
+</head>
+
+<body>
+    <canvas id=myCanvas width=696 height=800 style="background:url(노트.png)"></canvas>
+</body>
+<script>
+    var ctx = myCanvas.getContext("2d");
+    var word_y =0;
+
+
+    let Korean_Word = ['대조하다', '방출', '준비하다', '진단', '청원', '체육', '최저의', '현명한', '회계장부담당자','격노한','기뻐하는','기진맥진한','낙관적인','만족하는','무기력한','불만스러운','에대해사과하다','우울한','유익한','즐거워하는','피로한'];
+    let English_Word = ['collate', 'release', 'organize', 'diagnosis', 'petiton', 'athletics', 'marginal', 'sensible', 'bookkeeper','furious','delighted','exhausted','optimistic','content','listless','frustrating','apologize for','miserable','informative','amused','fatigued'];
+    for (let i = 0; i < Korean_Word.length; i++) {
+        word_y = word_y + 30;
+        
+        ctx.fillStyle = "brack";
+        ctx.font = "25px Arial";
+        ctx.fillText(English_Word[i], 0, word_y);
+        ctx.fillText(Korean_Word[i],350,word_y);
+    }
+
+
+
+</script>
+
+</html>

@@ -1,0 +1,5 @@
+﻿  app.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\cassert(9,10): fatal  error C1014: 포함 파일이 너무 많습니다. 수준 = 1024
+  circle.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\include\cassert(9,10): fatal  error C1014: 포함 파일이 너무 많습니다. 수준 = 1024
+  코드를 생성하고 있습니다...

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>The jQuery Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      $(function () {
+        var red_brush = {
+          color: "#fff",
+          "background-color": "#f00",
+        };
+        var green_brush = {
+          "background-color": "#0f0",
+        };
+        var blue_brush = {
+          color: "#fff",
+          "background-color": "#00f",
+        };
+        var red_pen = {
+          border: "2px solid #f00",
+        };
+        var green_pen = {
+          border: "2px solid #0f0",
+        };
+        var blue_pen = {
+          border: "2px solid #00f",
+        };
+        $(".bsu").css({
+          blue_brush,
+          red_pen,
+        });
+        $(".com", ".soft", ".secu", "multi").css({
+          red_brush,
+        });
+        $(".soft", ".secu", "multi").css({
+          blue_pen,
+        });
+        $(".soft", ".secu", "multi").css({
+          blue_pen,
+        });
+        $(".descrip").css({
+          blue_brush,
+          green_pen,
+        });
+        $.each($("#bsu"), function (i) {
+          $(this).css(blue_brush);
+          $(this).css(red_pen);
+        });
+        $.each($(".division1 .name"), function (i) {
+          $(this).css(red_brush);
+          $(this).css(green_pen);
+        });
+        $.each($(".division1 .descrip"), function (i) {
+          $(this).css(blue_brush);
+          $(this).css(green_pen);
+        });
+        $.each($(".division1 .major .name"), function (i) {
+          $(this).css(blue_pen);
+        });
+        $.each($(".division1 .major .descrip"), function (i) {
+          $(this).css(green_brush);
+          $(this).css(blue_pen);
+        });
+        $.each($(".division2 .name"), function (i) {
+          $(this).css(green_brush);
+          $(this).css(red_pen);
+        });
+        $.each($(".division2 .descrip"), function (i) {
+          $(this).css(blue_brush);
+          $(this).css(green_pen);
+        });
+        $.each($(".division2 .major .descrip"), function (i) {
+          $(this).css(blue_brush);
+          $(this).css(green_pen);
+        });
+      });
+    </script>
+    <style>
+      * {
+        margin: 10px;
+        padding: 12px;
+        border: 2px solid #666;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="univ">
+      <h1 id="bsu" class="name">백석대학교</h1>
+      <div class="division1">
+        <h1 id="com" class="name">컴퓨터공학부</h1>
+        <p class="descrip">컴퓨터공학부는 어쩌구 저쩌구</p>
+        <section class="major">
+          <h1 id="soft" class="name">소프트웨어학</h1>
+          <p class="descrip">소프트웨어학은 요렇게 조렇게</p>
+        </section>
+        <section class="major">
+          <h1 id="secu" class="name">정보보호학</h1>
+          <p class="descrip">정보보호학은 이러쿵 저러쿵</p>
+        </section>
+        <section class="major">
+          <h1 id="multi" class="name">멀티미디어학</h1>
+          <p class="descrip">멀티미디어는 부시럭 부시럭</p>
+        </section>
+      </div>
+      <div class="division2">
+        <h1 id="tour" class="name">관광학부</h1>
+        <p class="descrip">관광학부는 궁시렁 궁시렁</p>
+        <section class="major">
+          <h1 id="hotel" class="name">호텔경영</h1>
+          <p class="descrip">호텔경영은 바시락 바시락</p>
+        </section>
+        <section class="major">
+          <h1 id="manage" class="name">관광경영</h1>
+          <p class="descrip">관광경영은 미적 미적</p>
+        </section>
+        <section class="major">
+          <h1 id="inter" class="name">국제관광</h1>
+          <p class="descrip">국제관광은 비비적 비비적</p>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

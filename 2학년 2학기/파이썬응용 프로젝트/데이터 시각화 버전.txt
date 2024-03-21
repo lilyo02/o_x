@@ -1,0 +1,84 @@
+1. 경찰청_음주운전 전체 중 재범
+- 막대그래프 버전
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = pd.read_csv('경찰청정리.csv', index_col = '년도', encoding = 'utf-8')
+
+plt.rcParams.update({'font.family':'malgun gothic', 'font.size':10})
+
+#막대그래프
+data.plot(kind = "barh")
+
+plt.title('년도 별 음주운전자 중 재범인 수')
+
+#비교해야 할 두 그래프
+plt.plot(data[['전체', '재범']])
+
+plt.xlabel('수')
+plt.ylabel('년도')
+
+plt.show()
+
+- 선 그래프 버전
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = pd.read_csv('경찰청정리.csv', index_col = '년도', encoding = 'utf-8')
+
+plt.rcParams.update({'font.family':'malgun gothic', 'font.size':10})
+
+plt.title('년도 별 음주운전자 중 재범인 수')
+
+#비교해야 할 두 그래프
+plt.plot(data[['전체', '재범']])
+
+plt.xlabel('년도')
+plt.ylabel('수')
+
+plt.show()
+
+-> 음주운전 재범 건수가 작년에 비해 6.7% 더 증가했다
+2022년도 음주운전 교통사고 중 재범률이 42.2%를 차지하고 있다
+
+2. 도로교통공단_2018년도 발생건수에 따른 부상자수와 사망자수 비교
+- 막대그래프 버전
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# CSV 파일을 읽어온다
+data = pd.read_csv('건수정리.csv', encoding = 'cp949')
+
+# csv의 불필요한 부분 잘라내기
+data = data.drop(columns = ['중상'])
+data = data.drop(columns = ['경상'])
+data = data.drop(columns = ['부상신고'])
+
+plt.rcParams.update({'font.family':'malgun gothic', 'font.size':10})
+
+# 막대 그래프 그리기
+data.plot(kind = "bar")
+
+plt.title("발생건수에 따른 부상자수와 사망자수 비교")
+
+plt.show()
+-> 2018년도에만 부상 및 사망 관련 음주운전 교통사고만 19381건으로, 음주운전 1건에 사망 혹은 부상자가 1.7명 이상 발생했다.
+
+3. 경찰청, 경찰청범죄통계_
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def customPct(pct) :
+    return ('%.1f%%' % pct) if pct >= 15 else ''
+
+data = pd.read_csv("교통범죄(2022년).csv", encoding = 'utf-8')
+
+plt.rcParams.update({'font.family':'malgun gothic', 'font.size':7})
+
+plt.title("교통범죄 중 음주운전의 비율")
+
+plt.pie(data['발생건수(건)'], labels = data['상세죄종'], autopct = customPct)
+
+plt.show()
+
+->  2022년 경찰청에 접수된 형사 사건 중 교통범죄의 발생 건수에서 음주운전이 41.6%로 가장 많다.

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>산성비 게임</title>
+    <style>
+        #info {
+            float: left;
+            margin-left: 50px;
+            font-size: 30px;
+        }
+
+        #contents {
+            background-color: rgb(230, 191, 191);
+            width: 1200px;
+            height: 800px;
+            margin: 0 auto;
+        }
+
+        #tajaContents {
+            width: 100%;
+            height: 95%;
+            position: relative
+        }
+
+        #inputContents {
+            text-align: center;
+            border-top-style: solid;
+            border-top-color: black;
+            padding-top: 5px;
+        }
+
+        #inputText {
+            display: inline-block
+        }
+
+        #inputBtn {
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id=myCanvas width=1280 height=800 style="background:url(background.png)">
+
+    </canvas>
+    <input id="text" placeholder= "text" onkeypress="keydown(event.keyCode)">
+    <button id="a-+uth" onclick="keydown(13)">인증</button>
+    <script>
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        var Word_x = 0;
+        var Word_y = 0;
+        var dx = 0;
+        var dy = +1;
+        var score = 0;
+        var Planetimge = new Image();
+        const text_x = 500;
+        const text_y = 700;
+        const text_width = 300;
+        const text_height = 60;
+        var input_text = "test";
+        var select = RandInt(7);
+
+        
+        Planetimge.src = "단어/e" + select + ".png";
+        function RandInt(up_to) {
+            n = Math.floor(Math.random() * up_to);
+            return (n);
+        }
+
+        let IMG = ['e1', 'e2', 'e3', 'e4', 'e5', 'e6', 'e7', 'e8', 'e9']
+        let Word = ['대조하다', '방출', '빈칸', '진단', '청원', '체육', '가장자리의', '회계장부관리자']
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "red";
+            ctx.font = "25px Arial";
+            ctx.fillText("Score: " + score, 0, 20);
+            
+
+            Word_y = Word_y + 20;
+            if (Word_y > myCanvas.height) {
+                Word_y = 0;
+                Planetimge.src = "단어/e" + RandInt(7) + ".png";
+                Word_x = Math.random() * (myCanvas.width - 200);
+            }
+
+
+            if (wordfalse(myCanvas.height, Word_y)) {
+                score = score - 100;
+            }
+
+            ctx.drawImage(Planetimge, Word_x, Word_y);
+            ctx.fillStyle = "white";
+            ctx.fillRect(text_x, text_y, text_width, text_height);
+            ctx.strokeStyle = "red";
+            ctx.strokeRect(text_x, text_y, text_width, text_height);
+            ctx.fillStyle = "black";
+            ctx.fillText(input_text, text_x, text_y);
+        }
+
+        function wordfalse(y1, y2) { // 글자가 땅에 떨어졌을 때 점수 다운
+            if (y1 >= y2 + 5) { return false }
+            return true;
+
+        }
+
+        function keydown(keyCode) { //키보드 이벤트
+            if (keyCode == 13) {
+                var text = document.getElementById('text'); // 사용자 입력폼
+                text.value = "";
+            }
+            if (Word[select] === text ) {
+                score++;
+                select =+100
+                    input_text = ""
+            }
+            return
+        }
+
+        setInterval(draw, 50);
+
+
+    </script>
+
+
+</body>
+
+</html>

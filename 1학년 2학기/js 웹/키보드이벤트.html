@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <canvas
+      id="myCanvas"
+      width="500"
+      height="500"
+      style="background-color: pink"
+    >
+    </canvas>
+    <script>
+      var ctx = myCanvas.getContext("2d");
+      var X_pos = 0;
+      var Y_pos = 0;
+      var MyImg = new Image();
+      MyImg.src = "cat.png";
+
+      function MyKeyDownHandler(MyEvnet) {
+        if (MyEvnet.keyCode == 37 && X_pos - 10 >= 0) {
+          X_pos = X_pos - 10;
+        }
+        if (MyEvnet.keyCode == 38 && Y_pos - 10 >= 0) {
+          Y_pos = Y_pos - 10;
+        }
+        if (MyEvnet.keyCode == 39 && X_pos + MyImg.width <= myCanvas.width) {
+          X_pos = X_pos + 10;
+        }
+        if (MyEvnet.keyCode == 40 && Y_pos + MyImg.height <= myCanvas.height) {
+          Y_pos = Y_pos + 10;
+        }
+        MyEvnet.preventDefault();
+      }
+      function MyTimer() {
+        ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+
+        ctx.drawImage(MyImg, X_pos, Y_pos);
+      }
+      setInterval(MyTimer, 40);
+      addEventListener("keydown", MyKeyDownHandler);
+
+      /*if(MyEvnet.keyCode == 39){X_pos = X_pos+10;}
+        if(MyEvnet.keyCode == 37){X_pos = X_pos-10;}
+        if(MyEvnet.keyCode == 40){Y_pos = Y_pos+10;}
+        if(MyEvnet.keyCode == 38){Y_pos = Y_pos-10;}*/
+    </script>
+  </body>
+</html>

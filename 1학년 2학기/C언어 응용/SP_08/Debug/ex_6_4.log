@@ -1,0 +1,5 @@
+﻿  소스.c
+C:\Users\정예빈\Desktop\나\어치\ex_6_4\소스.c(14,21): warning C4013: 'malloc'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\정예빈\Desktop\나\어치\ex_6_4\소스.c(19,7): warning C4013: 'exit'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\정예빈\Desktop\나\어치\ex_6_4\소스.c(29,7): warning C4013: 'free'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+  ex_6_4.vcxproj -> C:\Users\정예빈\Desktop\나\어치\ex_6_4\Debug\ex_6_4.exe

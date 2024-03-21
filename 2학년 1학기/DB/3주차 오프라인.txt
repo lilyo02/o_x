@@ -1,0 +1,228 @@
+create database Company;
+
+use Company;
+
+create table Department(
+	DeptNo int not null,
+	DeptName char(10),
+	Floor int,
+	primary key(DeptNo)
+);
+
+insert into Department values (1, '영업', 8);
+insert into Department values (2, '기획', 10);
+insert into Department values (3, '개발', 9);
+insert into Department values (4, '총무', 7);
+insert into Department values(5, '전산', null);
+
+Select *
+From Department;
+
+create table Employee(
+	EmpNo int not null,
+	EmpName char(10),
+	Title char(10),
+	Salary int,
+	Dno int,
+	primary key(EmpNo),
+	foreign key (Dno) references Department (DeptNo)
+);
+
+insert into Employee values (2106, '김창섭', '대리', 2500000, 2);
+insert into Employee values (3426, '박영권', '과장', 3000000, 1);
+insert into Employee values (3011, '이수민', '부장', 4000000, 3);
+insert into Employee values (1003, '조민희', '과장', 3000000, 2);
+insert into Employee values (3427, '최종철', '사원', 1500000, 3);
+insert into Employee values (1365, '김상원', '사원', 1500000, 1);
+insert into Employee values (4377, '이성래', '사장', 5000000, 2);
+insert into Employee values (1212, '이선희', '인턴', 1000000, null);
+insert into Employee values (3901, '김수정', '인턴', 1000000, null);
+
+Select *
+From Employee;
+
+-- 복습 1번
+Select EmpName, Dno
+From Employee
+Where Dno = 3;
+-- 복습 2번
+Select EmpName, Dno
+From Employee
+Where Dno = 2 or Dno = 3;
+-- 복습 3번
+Select EmpName, Title
+From Employee
+Where Dno Is null;
+-- 복습 4번
+Select DeptName
+From Department
+Where Floor is null;
+-- 복습 5번
+Select EmpName, Salary
+From Employee
+Where Salary >= 2500000 and Salary <= 3000000
+-- = Where Salart Between 2500000 and 3000000
+Order By EmpName Asc;
+--복습 6번
+Select *
+From Employee
+Order By Salary Asc; -- Asc 생략 가능
+-- 복습 7번
+Select EmpName, Title, Salary
+From Employee
+Where Title = '과장'
+Order By Dno desc;
+-- 복습 8번
+Select Salary * 1.1 As '인상된 월급'
+From Employee;
+-- 복습 9번
+
+-- 연습
+Select AVG(Salary) As 평균급여
+From Employee;
+
+Select Max(Salary) As 최대급여
+From Employee;
+
+Select Sum(Salary) As '급여의 합계'
+From Employee;
+
+Select Count(Salary) As '데이터의 갯수'
+From Employee;
+
+Select Count(EmpNo)
+From Employee;
+
+Select Count(Dno) -- 데이터의 갯수로 null값은 세지 않기 때문에 답이 다름
+From Employee;
+
+Select Count(*) As '데이터의 갯수'
+From Employee;
+
+Select Dno, Avg(Salary) As '부서별 평균 급여'
+From Employee
+Group By Dno;
+
+Select Title, Avg(Salary)
+From Employee
+Group By Title
+Having Avg(Salary) >= 3000000;
+
+-- 다시 1번
+Select Count(Title) As '인턴 수'
+From Employee
+Where Title = '인턴';
+-- 다시 2번
+Select Sum(Salary) As '과장들의 월급 합계'
+From Employee
+Where Title = '과장';
+-- 다시 3번
+Select Count(*)
+From Employee
+Where Title in ('과장', '대리');
+-- 다시 4번
+Select Dno, Max(Salary)
+From Employee
+Group By Dno;
+-- 다시 5번
+Select Dno, Count(*)
+From Employee
+Group By Dno;
+-- 다시 6번
+Select Title, Count(*)
+From Employee
+Group By Title;
+-- 다시 7번
+Select Title, Avg(Salary)
+From Employee
+Group By Title;
+
+-- 1번
+Select *
+From Department
+Where DeptName = '영업';
+
+-- 2번
+Select EmpName, Title
+From Employee
+Where Title = '대리';
+
+-- 3번
+Select *
+From Employee
+Where Salary >= 2000000;
+
+-- 4번
+Select EmpName, Title
+From Employee
+Where Title = '사원' and Dno = 3;
+
+-- 5번
+Select EmpName
+From Employee
+Where Dno in (2, 3);
+
+-- 6번
+Select EmpName, Dno
+From Employee
+Where Dno <> 2;
+
+-- 7번
+Select Title, Salary
+From Employee
+Where EmpName = '이성래';
+
+-- 8번
+Select EmpName, Title
+From Employee
+Where EmpName like '이%';
+
+-- 9번
+Select EmpName, Title
+From Employee
+Where EmpName not like '이%';
+
+-- 10번
+Select EmpName, Title
+From Employee
+Where Dno is null ;
+
+-- 11번
+Select EmpName, Salary
+From Employee
+Where Salary Between 2500000 and 4000000;
+
+-- 12번 
+Select EmpName, Salary
+From Employee
+Where Dno = 1
+Order By EmpName Desc;
+
+-- 13번
+Select Avg(Salary) As 평균급여
+From Employee;
+
+-- 14번
+Select Count(*) As '모든 직원의 수'
+From Employee;
+
+-- 15번
+Select Count(*) As '과장인 직원의 수'
+From Employee
+Where Title = '과장';
+
+-- 16번
+Select Sum(Salary) As '2번 부서 직원들의 월급 총 합계'
+From Employee
+Where Dno = 2;
+
+-- 17번
+Select Dno, Avg(Salary) As '부서별 평균 월급'
+From Employee
+Group By Dno;
+
+-- 18번
+Select Dno, Avg(Salary) As '부서별 평균 월급'
+From Employee
+Group By Dno
+Having Avg(Salary) >= 2500000;
