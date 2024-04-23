@@ -6,13 +6,43 @@ import reportWebVitals from './reportWebVitals';
 
 import Library from './chapter_03/Library';
 import BookStore from './chapter_03/BookStore';
+import ConfirmDialog from './chapter_04/ConfirmDialog';
+
+import Clock from './chapter_04/Clock';
+import WorldClock from './chapter_05/WorldClock';
+import CommentList from './chapter_05/CommentList';
+
+import Task_List from './chapter_06/Task_List';
+
+// * BookStore
+// const root = ReactDOM.createRoot(document.getElementById('root'));
+
+// const confirmdlg = <ConfirmDialog/>
+// root.render(
+//   <React.StrictMode>
+//     <App/>
+//     {/* {confirmdlg} */}
+//     {/* <BookStore /> */}
+//   </React.StrictMode>
+// );
+
+// const domroot = document.getElementById('root');
+// console.log('{');
+// for (let keyname in domroot) {
+//   console.log(`\t ${keyname} : ${domroot[keyname]}`);
+// }
+// *
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <BookStore />
-  </React.StrictMode>
-);
+
+setInterval(() => {
+  root.render(
+    <React.StrictMode>
+      <Task_List/>
+      {/* <Clock alarm = {new Date(2024, 3, 3, 15, 50, 0, 0)}/> */}
+    </React.StrictMode>
+  );
+}, 1000);
 
 // class Hello extends React.Component {
 //   render() {
